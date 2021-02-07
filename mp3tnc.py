@@ -13,7 +13,7 @@ def log(str, newline=False):
 
     logdatetime = datetime.now().strftime("%Y-%m-%d %H.%M.%S")
 
-    f = open("hh_remover.log", "a")
+    f = open("mp3tnc.log", "a")
     if newline:
         f.write("\n")
 
@@ -27,10 +27,7 @@ def scanID3(filepath, dryrun = True):
     # Version 1, 1.0 or 1.1
     ID3_V1 = (1, None, None)
     ID3_V2 = (2, None, None)
-
     ID3_ANY_VERSION = (ID3_V1[0] | ID3_V2[0], None, None)
-
-
 
     audiofile = eyed3.load(filepath, ID3_V2)
 
@@ -56,20 +53,6 @@ def scanID3(filepath, dryrun = True):
     return changeCounter
 
 def main():
-    # Example to print ACTIONS as table with dynamic max length
-    # names = ["31. no tears left to cry (live) - Hiphopde.com.mp3",
-    #          "10. 7 rings (live) - Hiphopde.com.mp3",
-    #          "13. The Way (feat. Mac Miller) [Spanglish Version] - Hiphopde.com.mp3",
-    #          "02. Baby I - Hiphopde.com.mp3"]
-    # newNames = ["31. no tears left to cry (live).mp3",
-    #             "10. 7 rings (live).mp3",
-    #             "13. The Way (feat. Mac Miller) [Spanglish Version].mp3",
-    #             "02. Baby I.mp3"]
-    # asterisks = '->'
-    #
-    # padding = max(map(len, names))
-    # for name, newName in zip(names, newNames):
-    #     print ('{0}   {1}   {2}'.format(name.ljust(padding), asterisks, newName))
 
     # Ask for Dry run
     yes = {'yes', 'y', 'Yes', 'Y', 'YES'}
@@ -139,7 +122,7 @@ def main():
     if not globalAction:
         print(str(fileCounter) + " files scanned. No potential changes found.\n")
     else:
-        print(str(fileCounter) + "files scanned.\n")
+        print(str(fileCounter) + " files scanned.\n")
         print(str(renameCounter) + " files renamed")
         print(str(id3Counter) + " id3 Tags changed")
 
