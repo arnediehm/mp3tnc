@@ -37,7 +37,7 @@ python mp3tnc.py '/home/Documents/Music/Test'
 
 mp3tnc will ask if you want to run a dry run.
 
-First run a dry run and verify that the proposed changes are valid by entering **n**.
+First run a dry run (by entering **n**) and verify that the proposed changes are valid.
 
 Then run again and enter **y** to apply the changes to the Files.
 
