@@ -7,7 +7,7 @@ MP3 ID3 tag and filename cleaner
 root directory: '/home/Documents/Music/Test'
 ```
 
-*mp3tnc scans recursively and also processes all files in sub-folders!*
+**mp3tnc scans recursively and also processes all files in sub-folders!**
 
 Three MP3 files with the following file names and ID3 tags are to be changed.
 
@@ -35,7 +35,7 @@ Then either copy the python file to the root folder (to be scanned) or pass the 
 python mp3tnc.py '/home/Documents/Music/Test'
 ```
 
-mp3tnc will ask if you want to run a dry run.
+mp3tnc asks you if you want to disable dry running (no by default).
 
 First run a dry run (by entering **n**) and verify that the proposed changes are valid.
 
