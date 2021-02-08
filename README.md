@@ -1,8 +1,14 @@
-# mp3tnc
+[![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+[![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/arnediehm/mp3tnc/blob/master/LICENSE)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/arnediehm/mp3tnc)
 
-MP3 ID3 tag and filename cleaner
+# :musical_note: mp3tnc
 
-### Minimal Usage Example (reduced to a few files for ease of understanding)
+Mp3 ID3 tag and filename cleaner. 
+
+Removes strings from file names and id3 tags for all mp3 files in a folder.
+
+### Simplified Usage Example (reduced to a few files for ease of understanding)
 ```java
 root directory: '/home/Documents/Music/Test'
 ```
