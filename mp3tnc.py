@@ -40,34 +40,37 @@ def scan_id3(filepath, dry_run = True):
 
     change_counter = 0
 
-    if id3Str in title:
-        audio_file.tag.title = title.replace(id3Str, '')
-        print("ACTION (id3.title): \"" + title + "\" -> \"" + audio_file.tag.title + "\"")
-        change_counter += 1
+    if title:
+        if id3Str in title:
+            audio_file.tag.title = title.replace(id3Str, '')
+            print("ACTION (id3.title): \"" + title + "\" -> \"" + audio_file.tag.title + "\"")
+            change_counter += 1
 
-    if id3Str in artist:
-        audio_file.tag.artist = artist.replace(id3Str, '')
-        print("ACTION (id3.artist): \"" + artist + "\" -> \"" + audio_file.tag.artist + "\"")
-        change_counter += 1
+    if artist:
+        if id3Str in artist:
+            audio_file.tag.artist = artist.replace(id3Str, '')
+            print("ACTION (id3.artist): \"" + artist + "\" -> \"" + audio_file.tag.artist + "\"")
+            change_counter += 1
 
-    if id3Str in album:
-        audio_file.tag.album = album.replace(id3Str, '')
-        print("ACTION (id3.album): \"" + album + "\" -> \"" + audio_file.tag.album + "\"")
-        change_counter += 1
+    if album:
+        if id3Str in album:
+            audio_file.tag.album = album.replace(id3Str, '')
+            print("ACTION (id3.album): \"" + album + "\" -> \"" + audio_file.tag.album + "\"")
+            change_counter += 1
 
-    if id3Str in album_artist:
-        audio_file.tag.album_artist = album_artist.replace(id3Str, '')
-        print("ACTION (id3.album_artist): \"" + album_artist + "\" -> \"" + audio_file.tag.album_artist + "\"")
-        change_counter += 1
+    if album_artist:
+        if id3Str in album_artist:
+            audio_file.tag.album_artist = album_artist.replace(id3Str, '')
+            print("ACTION (id3.album_artist): \"" + album_artist + "\" -> \"" + audio_file.tag.album_artist + "\"")
+            change_counter += 1
 
-    if id3Str in composer:
-        audio_file.tag.composer = composer.replace(id3Str, '')
-        print("ACTION (id3.composer): \"" + composer + "\" -> \"" + audio_file.tag.composer + "\"")
-        change_counter += 1
+    if composer:
+        if id3Str in composer:
+            audio_file.tag.composer = composer.replace(id3Str, '')
+            print("ACTION (id3.composer): \"" + composer + "\" -> \"" + audio_file.tag.composer + "\"")
+            change_counter += 1
 
-    if dry_run:
-        change_counter = 0
-    else:
+    if not dry_run:
         audio_file.tag.save()
 
     return change_counter
@@ -107,8 +110,7 @@ def main():
 
     for subdir, dirs, files in os.walk(root_dir):
         for file in files:
-            file_counter += 1
-
+            
             # print os.path.join(subdir, file)
             filepath = subdir + os.sep + file
 
@@ -136,27 +138,32 @@ def main():
                     global_action = True
 
                 # Search- and change ID3 Tags
-                if action:
+                if action and not dry_run:
                     filepath = subdir + os.sep + new_filename
 
                 id3_counter += scan_id3(filepath, dry_run)
 
                 if id3_counter:
                     global_action = True
-
+                    
+                if dry_run:
+                    id3_counter = 0
+                
+                file_counter += 1
+        
         # Print new lines after action for every new sub folder
         if action:
             print()
             action = False
 
-    print()
     print("-------------------")
+    
     if not global_action and not dry_run:
         print(str(file_counter) + " files scanned. No potential changes found.\n")
     else:
-        print(str(file_counter) + " files scanned.\n")
+        print(str(file_counter) + " files scanned")
         print(str(rename_counter) + " files renamed")
-        print(str(id3_counter) + " id3 Tags changed")
+        print(str(id3_counter) + " id3 Tags changed\n")
 
     if dry_run:
         print("Dry run. No changes were made to any files !\n")
